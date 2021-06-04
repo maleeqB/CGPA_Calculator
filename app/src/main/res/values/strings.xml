@@ -47,4 +47,7 @@
 	</string>
     <string name="ok">OK</string>
     <string name="computeCGPA">Compute CGPA</string>
+    <string name="resultError">
+		ERROR: No Course Entry added so-far
+	</string>
 </resources>
