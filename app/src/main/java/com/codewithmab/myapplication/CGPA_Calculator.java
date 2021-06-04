@@ -42,24 +42,24 @@ public class CGPA_Calculator extends AppCompatActivity {
     }
 
     void popupInstructions(){
-        CardView instructionCardView = (CardView) LayoutInflater.from(this).inflate(R.layout.instructions, null);
+        CardView instructionCardView = (CardView) LayoutInflater.from(this).inflate(R.layout.instructions, cgpaCalcLinearLayout, false);
         TextView instructionTextView = instructionCardView.findViewById(R.id.instructionTextView);
         instructionTextView.setText(getString(R.string.app_info));
         cgpaCalcLinearLayout.addView(instructionCardView);
 
-        instructionCardView = (CardView) LayoutInflater.from(this).inflate(R.layout.instructions, null);
+        instructionCardView = (CardView) LayoutInflater.from(this).inflate(R.layout.instructions, cgpaCalcLinearLayout, false);
         instructionTextView = instructionCardView.findViewById(R.id.instructionTextView);
         instructionTextView.setText(HtmlCompat.fromHtml(getString(R.string.instruction_details), HtmlCompat.FROM_HTML_MODE_LEGACY));
         cgpaCalcLinearLayout.addView(instructionCardView);
 
-        instructionCardView = (CardView) LayoutInflater.from(this).inflate(R.layout.instructions, null);
+        instructionCardView = (CardView) LayoutInflater.from(this).inflate(R.layout.instructions, cgpaCalcLinearLayout, false);
         instructionTextView = instructionCardView.findViewById(R.id.instructionTextView);
         instructionTextView.setText(HtmlCompat.fromHtml(getString(R.string.instruction_addcourse), HtmlCompat.FROM_HTML_MODE_LEGACY));
         cgpaCalcLinearLayout.addView(instructionCardView);
     }
 
     void popupCourseEntries(){
-        LinearLayout lin = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.course_entries, null);
+        LinearLayout lin = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.course_entries, cgpaCalcLinearLayout, false);
         cgpaCalcLinearLayout.addView(lin);
 
         TableLayout tableLayout = lin.findViewById(R.id.tableLayout);
@@ -163,7 +163,7 @@ public class CGPA_Calculator extends AppCompatActivity {
                 TextView courseUnitCell = new TextView(CGPA_Calculator.this);
                 TextView courseGradeCell = new TextView(CGPA_Calculator.this);
 
-                Button x_button = (Button) LayoutInflater.from(CGPA_Calculator.this).inflate(R.layout.x_button, null);
+                Button x_button = (Button) LayoutInflater.from(CGPA_Calculator.this).inflate(R.layout.x_button, cgpaCalcLinearLayout, false);
 
                 courseCodeCell.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 courseUnitCell.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
