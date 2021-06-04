@@ -34,4 +34,17 @@
 		In case of Invalid inputs, an Error message is displayed, in that case try again with Valid Inputs
 		]]>
     </string>
+    <string name="emptyInputErrorMsg">ERROR: Empty Input Field</string>
+    <string name="invalidUnitErrorMsg">
+		<![CDATA[
+		<br>INVALID UNIT: %1$s <br>Course Unit must be digit
+		]]>
+	</string>
+    <string name="invalidGradeErrorMsg">
+		<![CDATA[
+		<br>INVALID GRADE: %1$s entered <br>Valid grades are: %2$s
+		]]>
+	</string>
+    <string name="ok">OK</string>
+    <string name="computeCGPA">Compute CGPA</string>
 </resources>
