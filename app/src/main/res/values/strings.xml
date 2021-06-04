@@ -1,10 +1,37 @@
 <resources>
     <string name="app_name">CGPA Calculator</string>
 
+    <!--Widget Labels-->
     <string name="add">Add</string>
     <string name="gradeScored">Grade Scored</string>
     <string name="courseUnit">Course Unit</string>
     <string name="courseCode">Course Code</string>
     <string name="addCourse">Add Course</string>
 
+    <!--Instructions-->
+    <string name="app_info">
+		This free utility performs the boring task of Calculating your CPGA, just add all your Courses and grades in the table below
+	</string>
+    <string name="instruction_details">
+		<![CDATA[
+		<b>NOTE: </b>Click the <em>Add Course</em> button below to add Your Courses in the following format -
+		<br><br>
+		COURSE CODE: Usually 3-digit, not necessarily  distinct for each subject
+		<br>
+		COURSE UNIT: Unit for the entered Course - It must be a digit
+		<br>
+		GRADE SCORED: Grade scored - Valid Grades are A,B,C,D,E,F
+		<br><br>
+		<em>To remove a Course from the Table, simply click the </em> <span><b>x</b></span> <em> button next to the given course row</em>
+		]]>
+	</string>
+    <string name="instruction_addcourse">
+    <![CDATA[
+		Click the <em>Add Course</em> button to display the Input Buttons
+		<br>
+		After entering the fields in the Order listed above, Scroll down to the <em>Add</em> button to add the given entries into the Table.
+		<br><br>
+		In case of Invalid inputs, an Error message is displayed, in that case try again with Valid Inputs
+		]]>
+    </string>
 </resources>
