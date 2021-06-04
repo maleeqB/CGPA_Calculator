@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">CGPA Calculator</string>
+
+    <string name="add">Add</string>
+    <string name="gradeScored">Grade Scored</string>
+    <string name="courseUnit">Course Unit</string>
+    <string name="courseCode">Course Code</string>
+    <string name="addCourse">Add Course</string>
+
 </resources>
