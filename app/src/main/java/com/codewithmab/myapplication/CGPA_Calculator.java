@@ -14,16 +14,19 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.collection.SimpleArrayMap;
 import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class CGPA_Calculator extends AppCompatActivity {
     LinearLayout cgpaCalcLinearLayout;
@@ -65,6 +68,7 @@ public class CGPA_Calculator extends AppCompatActivity {
 
         Button addCourseButton = lin.findViewById(R.id.addCourseButton);
         Button confirmAdditionButton = lin.findViewById(R.id.confirmAdditionButton);
+        Button computeCGPA = lin.findViewById(R.id.computeCGPA);
 
         LinearLayout userInputLinearLayout = lin.findViewById(R.id.userInputLinearLayout);
         LinearLayout errorMsgLinearLayout = lin.findViewById(R.id.errorMsgLinearLayout);
@@ -85,22 +89,22 @@ public class CGPA_Calculator extends AppCompatActivity {
                 if(emptyInputField(courseCodeInput, courseUnitInput, gradeScoredInput)){
                     TextView errorMsgTextView = new TextView(CGPA_Calculator.this);
                     errorMsgTextView.setTextColor(ContextCompat.getColor(CGPA_Calculator.this, R.color.red));
-                    errorMsgTextView.setText(CGPA_Calculator.this.getString(R.string.emptyInputErrorMsg));
+                    errorMsgTextView.setText(getString(R.string.emptyInputErrorMsg));
 
                     Button errorButton = new Button(CGPA_Calculator.this);
-                    errorButton.setText("OK");
+                    errorButton.setText(getString(R.string.ok));
 
                     //Remove The Input Fields and Display The Error Message
                     userInputLinearLayout.setVisibility(View.GONE);
                     errorMsgLinearLayout.addView(errorMsgTextView);
                     errorMsgLinearLayout.addView(errorButton);
-                    errorButton.setOnClickListener((view) -> {resetInput();});
+                    errorButton.setOnClickListener((view) -> resetInput());
                 } else
                     verifyCourseInput(courseCodeInput, courseUnitInput, gradeScoredInput);
             }
 
             private void verifyCourseInput(EditText courseCodeInput, EditText courseUnitInput, EditText gradeScoredInput){
-                String code, unit, grade, errorMsg = "";;
+                String code, unit, grade, errorMsg = "";
                 code = courseCodeInput.getText().toString(); unit = courseUnitInput.getText().toString(); grade = gradeScoredInput.getText().toString().toUpperCase();
 
                 List<String> validGrades = new ArrayList<>();
@@ -122,7 +126,7 @@ public class CGPA_Calculator extends AppCompatActivity {
                     errorMsgLinearLayout.addView(errorMsgTextView);
                     errorMsgLinearLayout.addView(errorButton);
 
-                    errorButton.setOnClickListener((view) -> {resetInput();});
+                    errorButton.setOnClickListener((view) -> resetInput());
                 } else {
                     addCourseToTable(code, unit, grade);
                     removeInput();
@@ -186,12 +190,57 @@ public class CGPA_Calculator extends AppCompatActivity {
 
                 tableLayout.addView(tableRow);
 
-                x_button.setOnClickListener((v) -> {
-                    tableLayout.removeView(tableRow);
-                });
+                x_button.setOnClickListener((v) -> tableLayout.removeView(tableRow));
             }
         });
 
+        computeCGPA.setOnClickListener(new View.OnClickListener() {
+            TextView resultTextView;
+            @Override
+            public void onClick(View v) {
+                resultTextView = lin.findViewById(R.id.resultTextView);
+                if(tableLayout.getChildCount() < 2){
+                    Toast.makeText(CGPA_Calculator.this,getString(R.string.resultError), Toast.LENGTH_SHORT).show();
+                    resultTextView.setText("");
+                    resultTextView.setBackground(null);
+                    return;
+                }
+
+                int totalCourseUnits = 0;
+                int totalGradeScored = 0;
+
+                for (int i = 0; i < getAllCourseUnits().size(); i++) {
+                    totalCourseUnits+=getAllCourseUnits().get(i);
+                    totalGradeScored+=getAllGradeScored().get(i);
+                }
+                resultTextView.setBackground(ContextCompat.getDrawable(CGPA_Calculator.this, R.drawable.border));
+                resultTextView.setText(String.format(Locale.getDefault(), "%.2f",((float)totalGradeScored / (float)totalCourseUnits)));
+            }
+
+            private List<Integer> getAllCourseUnits(){
+                List<Integer> courseUnits = new ArrayList<>();
+                for (int i = 1; i < tableLayout.getChildCount(); i++) {
+                    TableRow tableRow = (TableRow) tableLayout.getChildAt(i);
+                    TextView courseUnit = (TextView) tableRow.getChildAt(1);
+                    courseUnits.add(Integer.valueOf(courseUnit.getText().toString()));
+                }
+                return courseUnits;
+            }
+            private List<Integer> getAllGradeScored(){
+                List<Integer> courseGrades = new ArrayList<>();
+                SimpleArrayMap<String, Integer> gradePoints = new SimpleArrayMap<>();
+                gradePoints.put("A",5); gradePoints.put("B",4); gradePoints.put("C",3); gradePoints.put("D",2); gradePoints.put("E",1); gradePoints.put("F",0);
+
+                for (int i = 1; i < tableLayout.getChildCount(); i++) {
+                    TableRow tableRow = (TableRow) tableLayout.getChildAt(i);
+                    int courseUnit = Integer.parseInt(((TextView) tableRow.getChildAt(1)).getText().toString());
+                    String gradeScored = ((TextView) tableRow.getChildAt(2)).getText().toString();
+
+                    courseGrades.add(courseUnit * gradePoints.get(gradeScored));
+                }
+                return courseGrades;
+            }
+        });
     }
 
 
