@@ -1,0 +1,6 @@
+include ':jnr'
+include ':esha'
+include ':nana'
+include ':demo'
+include ':app'
+rootProject.name = "CGPA_Calculator"
