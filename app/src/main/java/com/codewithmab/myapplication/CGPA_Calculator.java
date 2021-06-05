@@ -2,6 +2,7 @@ package com.codewithmab.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -183,32 +184,46 @@ public class CGPA_Calculator extends AppCompatActivity {
 
                 Button x_button = (Button) LayoutInflater.from(CGPA_Calculator.this).inflate(R.layout.x_button, cgpaCalcLinearLayout, false);
 
-                courseCodeCell.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                courseUnitCell.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                courseGradeCell.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                x_button.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                setCellsLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT), courseCodeCell, courseUnitCell, courseGradeCell, x_button);
 
                 courseCodeCell.setText(code);
                 courseUnitCell.setText(unit);
                 courseGradeCell.setText(grade);
                 x_button.setText("x");
 
-                courseCodeCell.setGravity(Gravity.CENTER);
-                courseUnitCell.setGravity(Gravity.CENTER);
-                courseGradeCell.setGravity(Gravity.CENTER);
-
-                courseCodeCell.setBackground(ContextCompat.getDrawable(CGPA_Calculator.this, R.drawable.border));
-                courseUnitCell.setBackground(ContextCompat.getDrawable(CGPA_Calculator.this, R.drawable.border));
-                courseGradeCell.setBackground(ContextCompat.getDrawable(CGPA_Calculator.this, R.drawable.border));
-
-                tableRow.addView(courseCodeCell);
-                tableRow.addView(courseUnitCell);
-                tableRow.addView(courseGradeCell);
-                tableRow.addView(x_button);
+                setCellsGravity(Gravity.CENTER, courseCodeCell, courseUnitCell, courseGradeCell);
+                setCellsBorderBackground(ContextCompat.getDrawable(CGPA_Calculator.this, R.drawable.border), courseCodeCell, courseUnitCell, courseGradeCell);
+                setCellsTextColor(ContextCompat.getColor(CGPA_Calculator.this, R.color.black), courseCodeCell, courseUnitCell, courseGradeCell);
+                addCellsToTableRow(tableRow, courseCodeCell, courseUnitCell, courseGradeCell, x_button);
 
                 tableLayout.addView(tableRow);
 
                 x_button.setOnClickListener((v) -> tableLayout.removeView(tableRow));
+            }
+            private void addCellsToTableRow(TableRow tableRow, View... views){
+                for (View view : views){
+                    tableRow.addView(view);
+                }
+            }
+            private void setCellsBorderBackground(Drawable background, View... views){
+                for(View view : views){
+                    view.setBackground(background);
+                }
+            }
+            private void setCellsTextColor(int color, TextView... textViews){
+                for(TextView textView : textViews){
+                    textView.setTextColor(color);
+                }
+            }
+            private void setCellsLayoutParams(ViewGroup.LayoutParams params, View... cells){
+                for (View cell : cells){
+                    cell.setLayoutParams(params);
+                }
+            }
+            private void setCellsGravity(int gravity, TextView... textViews){
+                for (TextView textView : textViews){
+                    textView.setGravity(gravity);
+                }
             }
         });
 
