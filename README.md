@@ -3,4 +3,8 @@
 
 #### Online Version [here](https://maleeqb.github.io/online_cgpa_calculator)
 ### [Download](https://github.com/maleeqB/CGPA_Calculator/raw/master/app/release/cgpa_calculator.apk)
+
 <img src="cgpa_calc.png" alt="Screenshot" width="250px" height="500px">
+
+## Support
+If you love my work consider buying me a [coffee](https://www.buymeacoffee.com/maleeqB)
