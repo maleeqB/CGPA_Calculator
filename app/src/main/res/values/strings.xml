@@ -8,6 +8,7 @@
     <string name="courseUnit">Course Unit</string>
     <string name="courseCode">Course Code</string>
     <string name="addCourse">Add Course</string>
+    <string name="calculator">Calculate CGPA</string>
 
     <!--Instructions-->
     <string name="app_info">
@@ -30,9 +31,9 @@
     <![CDATA[
 		Click the <em>Add Course</em> button to display the Input Buttons
 		<br>
-		After entering the fields in the Order listed above, Scroll down to the <em>Add</em> button to add the given entries into the Table.
+		After entering the fields in the Order listed above, Click <em>Add</em> button to add the given entries into the Table.
 		<br><br>
-		In case of Invalid inputs, an Error message is displayed, in that case try again with Valid Inputs
+		In case of Invalid inputs, an Error message is displayed, Click the OK button and try again with Valid Inputs
 		]]>
     </string>
     <string name="emptyInputErrorMsg">ERROR: Empty Input Field</string>
